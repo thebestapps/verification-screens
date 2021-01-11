@@ -1,0 +1,7 @@
+{
+  "name": "MobileVerificationApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
