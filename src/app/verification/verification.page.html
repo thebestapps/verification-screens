@@ -1,0 +1,141 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>SIGN IN</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container" *ngIf="!Message_sent_dialog">
+    <p class="txt-upside">Enter your phone number</p>
+    <form [formGroup]="form_detail">
+      <ion-item>
+        <div class="items">
+          <img src="{{country_image}}" class="country-flag" />
+
+          <p class="txt-country-name">
+            <ion-select
+              type="tel"
+              formControlName="selectedCountry"
+              (ionChange)="getChange()"
+              value="1"
+              placeholder="Country Name"
+            >
+              <ion-select-option value="1">United States</ion-select-option>
+              <ion-select-option value="2">India</ion-select-option>
+            </ion-select>
+          </p>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <div class="items">
+          <p class="country-code">{{country_code}}</p>
+
+          <p class="txt-align-right">
+            <ion-input
+              formControlName="phone"
+              placeholder="10 digit phone number"
+            >
+            </ion-input>
+          </p>
+        </div>
+      </ion-item>
+
+      <p class="text-bottom">We'll send a 4 digit verification code via sms</p>
+
+      <ion-row>
+        <ion-col style="text-align: center">
+          <ion-button
+            (click)="sendOTP()"
+            style="width: 91%; height: 48px; --background: black"
+            [disabled]="!form_detail.valid"
+            class="verify-btn"
+          >
+            VERIFY
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </div>
+
+  <div class="container" *ngIf="Message_sent_dialog">
+    <p class="text-upside">
+      We've send a verification code to {{phoneNumber}}.
+    </p>
+
+    <p class="text-upside txt">You should receive an SMS soon</p>
+
+    <div class="container-inside-otp">
+      <p class="txt-enter">Enter 4 digit verification code</p>
+
+      <!-- <ion-row>
+        <ion-col style="text-align: center">
+          <ng-otp-input
+            (onInputChange)="onOtpChange($event)"
+            [config]="{length:4}"
+          ></ng-otp-input>
+        </ion-col>
+      </ion-row> -->
+
+      <ion-row text-center>
+        <ion-col style="text-align: center">
+          <ion-input
+            [(ngModel)]="textOne"
+            class="inputOtp"
+            #otp1
+            required
+            maxLength="1"
+            (keyup)="otpController($event,otp2,'')"
+          >
+          </ion-input>
+          <ion-input
+            [(ngModel)]="textTwo"
+            class="inputOtp"
+            #otp2
+            required
+            maxLength="1"
+            (keyup)="otpController($event,otp3,otp1)"
+          >
+          </ion-input>
+          <ion-input
+            [(ngModel)]="textThree"
+            class="inputOtp"
+            #otp3
+            required
+            maxLength="1"
+            (keyup)="otpController($event,otp4,otp2)"
+          >
+          </ion-input>
+          <ion-input
+            [(ngModel)]="textFour"
+            class="inputOtp"
+            #otp4
+            required
+            maxLength="1"
+            (keyup)="otpController($event,'',otp3)"
+          >
+          </ion-input>
+        </ion-col>
+      </ion-row>
+
+      <p class="txt-bottom-links">
+        Did't get a code?
+        <span class="link" (click)="resendSMS()"> Resend SMS </span> or
+        <span class="link" (click)="editNumber()"> Edit Mobile Number </span>
+      </p>
+
+      <ion-row>
+        <ion-col style="text-align: center">
+          <ion-button
+            [disabled]="!otpEntered"
+            (click)="confirmDialog()"
+            style="width: 91%; height: 48px; --background: black"
+            class="verify-btn"
+          >
+            CONFIRM
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</ion-content>
