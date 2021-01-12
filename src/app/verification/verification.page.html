@@ -14,10 +14,11 @@
 
           <p class="txt-country-name">
             <ion-select
+              style="min-width: 147px"
               type="tel"
               formControlName="selectedCountry"
               (ionChange)="getChange()"
-              value="1"
+              value="2"
               placeholder="Country Name"
             >
               <ion-select-option value="1">United States</ion-select-option>
@@ -112,7 +113,25 @@
             #otp4
             required
             maxLength="1"
-            (keyup)="otpController($event,'',otp3)"
+            (keyup)="otpController($event,otp5,otp3)"
+          >
+          </ion-input>
+          <ion-input
+            [(ngModel)]="textFive"
+            class="inputOtp"
+            #otp5
+            required
+            maxLength="1"
+            (keyup)="otpController($event,otp6,otp4)"
+          >
+          </ion-input>
+          <ion-input
+            [(ngModel)]="textSix"
+            class="inputOtp"
+            #otp6
+            required
+            maxLength="1"
+            (keyup)="otpController($event,'',otp5)"
           >
           </ion-input>
         </ion-col>

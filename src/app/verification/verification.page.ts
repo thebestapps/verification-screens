@@ -19,6 +19,8 @@ export class VerificationPage implements OnInit {
   textTwo: any;
   textThree: any;
   textFour: any;
+  textFive: any;
+  textSix: any;
   enteredOtp: any;
   constructor(
     private fb: FormBuilder,
@@ -34,13 +36,12 @@ export class VerificationPage implements OnInit {
           Validators.maxLength(10),
         ]),
       ],
-      selectedCountry: ["", Validators.compose([Validators.required])],
+      selectedCountry: ["2", Validators.compose([Validators.required])],
     });
 
     // if (this.form_detail.value.selectedCountry == 1) {
-    this.country_code = "+1";
-    this.country_image =
-      "../../assets/united-states-of-america-flag-icon-64.png";
+    this.country_code = "+91";
+    this.country_image = "../../assets/india-flag-icon-64.png";
     // }
   }
 
@@ -80,9 +81,14 @@ export class VerificationPage implements OnInit {
 
   otpController(event, next, prev) {
     this.enteredOtp =
-      this.textOne + this.textTwo + this.textThree + this.textFour;
+      this.textOne +
+      this.textTwo +
+      this.textThree +
+      this.textFour +
+      this.textFive +
+      this.textSix;
 
-    if (this.enteredOtp.length == 4) {
+    if (this.enteredOtp.length == 6) {
       this.otpEntered = true;
     }
 
@@ -112,6 +118,8 @@ export class VerificationPage implements OnInit {
     this.textTwo = "";
     this.textThree = "";
     this.textFour = "";
+    this.textFive = "";
+    this.textSix = "";
 
     this.otpEntered = false;
   }
